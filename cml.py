@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd
+
 
 # 设置页面配置
 st.set_page_config(
@@ -51,21 +51,25 @@ with c1:
     '期望薪资范围（元）',
     5000, 50000, (15000, 30000))
 
-    st.text_area(label='个人简介：', placeholder='请简要介绍您的专业背景、职业目标和个人特点')
+    grjj=st.text_area(label='个人简介：', placeholder='请简要介绍您的专业背景、职业目标和个人特点')
 
     w10=st.text('每日最佳联系时间')
     time = st.selectbox(
         '选择时间',
         ['18:50', '19:30', '20:20', '21:00','21:30'],
         label_visibility='collapsed'
-    )    
-
+    )
+    
+    upload_file=st.file_uploader('上传个人照片',type='jpg')
+    if upload_file is not None:
+        bytes_data=upload_file.getvalue()
 
 with c2:
     st.subheader("简历实时预览")
     c1,c2=st.columns(2)
     with c1:
         st.write(w1)
+        st.write(upload_file)
         st.write("职位:",w2)
         st.write("电话:",w3)
         st.write("邮箱:",w4)
@@ -79,6 +83,11 @@ with c2:
         st.write("期望薪资:",gz)
         st.write("每日最佳联系时间:",time)
         st.write("语言能力:",w8)
+    t1=st.subheader("个人简历")
+    st.write(grjj)
+    t2=st.subheader("专业技能")
+    st.write(w9)
+    
 
 
 
